@@ -1,27 +1,24 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Mains(string[] args)
     {
-        var res = 0;
-        int numberOfItems = int.Parse(Console.ReadLine()!);
-        List<int> items = new List<int>();
-        var line = Console.ReadLine();
-        var Itemstring = line.Split(" ");
-        for (int i = 0; i < numberOfItems; i++)
+        int size =int.Parse(Console.ReadLine());
+        long[] items = new long[size];
+        string[] line = Console.ReadLine().Split(" ");
+        for (int i = 0; i < size-1; i++)
         {
-            items.Add(int.Parse(Itemstring[i]));
-        }
-        items.Sort();
-        var amountOfDiscounts = Math.Abs(numberOfItems/3);
-        var discountIndex = numberOfItems-3;
-        while(amountOfDiscounts > 0){
-            res += items[discountIndex];
-            discountIndex -= 3;
-            amountOfDiscounts --;
-        }
+            items[i] = int.Parse(line[i]);
+        } 
+        Array.Sort(items);
+        Array.Reverse(items);
+        //items.OrderBy(item => item).Reverse();
+        long res = 0;
+        for (int x = 0; x < size; x++)
+            if (x % 3 == 2)
+                res += items[x];
         Console.WriteLine(res);
     }
 }
